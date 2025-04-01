@@ -12,7 +12,7 @@ def extract_text(pdf_file):
 
 # GPT-driven evaluation with improved specificity
 def evaluate_resume(api_key, job_description, resume_text, core_criteria, other_criteria):
-    client = OpenAI(api_key=api_key)
+    client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
     # Combine criteria into one string
     criteria_prompt = core_criteria.strip()
@@ -45,7 +45,6 @@ st.set_page_config(page_title="Resume Evaluator", layout="wide")
 st.title("📑 Resume Evaluator App")
 
 # Input Section
-api_key = st.text_input("Enter your OpenAI API Key", type="password")
 job_description = st.file_uploader("Upload Job Description (PDF)", type="pdf")
 uploaded_resumes = st.file_uploader("Upload up to 5 Resumes (PDF)", type="pdf", accept_multiple_files=True)
 
