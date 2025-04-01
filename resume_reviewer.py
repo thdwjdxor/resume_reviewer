@@ -11,7 +11,7 @@ def extract_text(pdf_file):
     return text
 
 # GPT-driven evaluation with improved specificity
-def evaluate_resume(api_key, job_description, resume_text, core_criteria, other_criteria):
+def evaluate_resume(job_description, resume_text, core_criteria, other_criteria):
     client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
     # Combine criteria into one string
@@ -69,9 +69,7 @@ if uploaded_resumes and len(uploaded_resumes) > 5:
 
 # Evaluation button
 if st.button("Evaluate Resumes"):
-    if not api_key:
-        st.error("Please enter your OpenAI API Key.")
-    elif not job_description:
+    if not job_description:
         st.error("Please upload the Job Description.")
     elif not uploaded_resumes:
         st.error("Please upload at least one resume.")
@@ -88,5 +86,5 @@ if st.button("Evaluate Resumes"):
             with columns[i]:
                 with st.expander(f"📄 Evaluation Result for Resume #{i+1}: {resume.name}"):
                     with st.spinner("Evaluating..."):
-                        evaluation = evaluate_resume(api_key, job_desc_text, resume_text, crit1, crit2)
+                        evaluation = evaluate_resume(job_desc_text, resume_text, crit1, crit2)
                         st.markdown(evaluation)
