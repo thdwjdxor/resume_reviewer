@@ -46,7 +46,7 @@ st.title("📑 Resume Evaluator App")
 
 # Input Section
 job_description = st.file_uploader("Upload Job Description (PDF)", type="pdf")
-uploaded_resumes = st.file_uploader("Upload up to 5 Resumes (PDF)", type="pdf", accept_multiple_files=True)
+uploaded_resumes = st.file_uploader("Upload up to 10 Resumes (PDF)", type="pdf", accept_multiple_files=True)
 
 # Default criteria
 default_criteria = """
@@ -63,9 +63,9 @@ crit1 = st.text_area("Core Criteria", value=default_criteria, height=150)
 # Single-line input for other criteria
 crit2 = st.text_input("Other Criteria", value="")
 
-# Limit resumes to 5
-if uploaded_resumes and len(uploaded_resumes) > 5:
-    st.warning("You can upload a maximum of 5 resumes.")
+# Limit resumes to 10
+if uploaded_resumes and len(uploaded_resumes) > 10:
+    st.warning("You can upload a maximum of 10 resumes.")
 
 # Evaluation button
 if st.button("Evaluate Resumes"):
@@ -76,10 +76,10 @@ if st.button("Evaluate Resumes"):
     else:
         job_desc_text = extract_text(job_description)
 
-        # Create columns for each resume (max 5 columns)
-        columns = st.columns(len(uploaded_resumes[:5]))
+        # Create columns for each resume (max 10 columns)
+        columns = st.columns(len(uploaded_resumes[:10]))
 
-        for i, resume in enumerate(uploaded_resumes[:5]):
+        for i, resume in enumerate(uploaded_resumes[:10]):
             resume_text = extract_text(resume)
 
             # Place each resume's evaluation inside its own column
